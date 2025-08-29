@@ -1,200 +1,451 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  TrendingUp, 
-  Sparkles, 
-  Image, 
-  Calendar, 
-  Share2, 
-  Zap,
-  Clock,
-  Users,
-  BarChart3,
-  Lightbulb,
-  ExternalLink
-} from 'lucide-react';
+import { Zap, TrendingUp, Sparkles, Brain, Palette, Target, Calendar, Share2, Twitter, Instagram, Youtube, Play, Star, ArrowRight, CheckCircle, Users, Award, Globe, Shield } from 'lucide-react';
 import Link from 'next/link';
-import Header from './components/Header';
-import TrendingTopics from './components/TrendingTopics';
-import MemeGenerator from './components/MemeGenerator';
-import ContentScheduler from './components/ContentScheduler';
-import Analytics from './components/Analytics';
 
-export default function Home() {
-  const [activeTab, setActiveTab] = useState('trends');
+export default function LandingPage() {
+  const features = [
+    {
+      icon: TrendingUp,
+      title: "Real-Time Trend Scanning",
+      description: "AI monitors trending topics across all major social platforms",
+      gradient: "from-blue-500 to-purple-500"
+    },
+    {
+      icon: Brain,
+      title: "AI Meme Generation",
+      description: "Smart algorithms create viral-ready content tailored to your style",
+      gradient: "from-pink-500 to-purple-500"
+    },
+    {
+      icon: Palette,
+      title: "Custom Templates",
+      description: "Hundreds of meme templates updated with trending formats",
+      gradient: "from-blue-500 to-pink-500"
+    },
+    {
+      icon: Target,
+      title: "Niche Targeting",
+      description: "Content personalized for your specific audience and industry",
+      gradient: "from-pink-500 to-purple-500"
+    },
+    {
+      icon: Calendar,
+      title: "Smart Scheduling",
+      description: "Auto-post at optimal times for maximum engagement",
+      gradient: "from-blue-500 to-purple-500"
+    },
+    {
+      icon: Share2,
+      title: "Multi-Platform Export",
+      description: "One-click sharing to all your social media accounts",
+      gradient: "from-blue-500 to-pink-500"
+    }
+  ];
 
-  const tabs = [
-    { id: 'trends', label: 'Trending Topics', icon: TrendingUp },
-    { id: 'generator', label: 'Meme Generator', icon: Sparkles },
-    { id: 'scheduler', label: 'Content Scheduler', icon: Calendar },
-    { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "Content Creator",
+      avatar: "👩‍🎨",
+      content: "This platform revolutionized my content strategy. My engagement increased by 300% in just 2 months!",
+      rating: 5
+    },
+    {
+      name: "Mike Chen",
+      role: "Social Media Manager",
+      avatar: "👨‍💼",
+      content: "The AI-powered trend analysis is incredible. I'm always ahead of the curve now.",
+      rating: 5
+    },
+    {
+      name: "Emma Rodriguez",
+      role: "Digital Marketer",
+      avatar: "👩‍💻",
+      content: "Best investment for our agency. The scheduling features save us hours every week.",
+      rating: 5
+    }
+  ];
+
+  const stats = [
+    { value: "10K+", label: "Memes Generated", icon: Sparkles },
+    { value: "500+", label: "Viral Templates", icon: TrendingUp },
+    { value: "24/7", label: "Trend Monitoring", icon: Globe },
+    { value: "98%", label: "User Satisfaction", icon: Award }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-purple-950 dark:to-blue-950 transition-colors duration-300">
-      <Header />
-      
-      <main className="container mx-auto px-4 py-8">
-        {/* Landing Page Link */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8"
-        >
-          <Link 
-            href="/landing" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-          >
-            <ExternalLink className="w-4 h-4" />
-            View Landing Page
-          </Link>
-        </motion.div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-950 to-blue-950 text-white overflow-hidden">
+      {/* Header */}
+      <header className="relative z-10 p-6">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+              <Zap className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              MemeGen
+            </span>
+          </div>
+          
+          <nav className="hidden md:flex items-center space-x-8">
+            {['Features', 'Templates', 'Pricing', 'About'].map((item) => (
+              <motion.a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
+                whileHover={{ y: -2 }}
+              >
+                {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+              </motion.a>
+            ))}
+          </nav>
 
-        {/* Hero Section */}
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
+          <div className="flex items-center space-x-4">
+            <Link 
+              href="/login"
+              className="px-4 py-2 text-gray-300 hover:text-white transition-colors duration-300 font-medium"
+            >
+              Sign In
+            </Link>
+            <Link 
+              href="/signup"
+              className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Get Started
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* AI-Powered Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="text-center py-4 bg-purple-800/30 backdrop-blur-sm border-b border-purple-500/20"
+      >
+        <div className="flex items-center justify-center gap-2 text-sm text-purple-200">
+          <Sparkles className="w-4 h-4 text-purple-300 animate-pulse" />
+          AI-Powered Meme Generation
+        </div>
+      </motion.div>
+
+      {/* Hero Section */}
+      <section className="relative z-0 flex flex-col items-center justify-center text-center py-20 px-4 min-h-[calc(100vh-120px)]">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="max-w-5xl"
         >
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent mb-6">
-            Smart Meme & Trend Generator
+          <h1 className="text-6xl md:text-8xl font-extrabold leading-tight mb-8">
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Smart Meme
+            </span>
+            <span className="text-white"> & </span>
+            <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+              Trend Generator
+            </span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-            Stay ahead of the curve with AI-powered meme generation, trending topic analysis, 
-            and automated content scheduling for maximum social media engagement.
+          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Stay ahead of viral trends and create engaging content that resonates. AI-powered meme templates, trending topics, and instant content generation.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <Zap className="w-5 h-5" />
-              Start Creating
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 px-8 py-3 rounded-full font-semibold hover:bg-purple-600 hover:text-white dark:hover:bg-purple-400 dark:hover:text-gray-900 transition-all duration-300"
+              <Link 
+                href="/signup"
+                className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-lg rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg group"
+              >
+                <Zap className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+                Start Creating
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <Users className="w-5 h-5" />
-              View Demo
-            </motion.button>
+              <Link 
+                href="/demo"
+                className="inline-flex items-center justify-center gap-3 px-10 py-4 border-2 border-purple-400 text-purple-400 font-bold text-lg rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300 transform hover:scale-105 group"
+              >
+                <TrendingUp className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                View Demo
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
+      </section>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          {[
-            { icon: TrendingUp, label: 'Trending Topics', value: '500+', color: 'from-green-500 to-emerald-500' },
-            { icon: Sparkles, label: 'Meme Templates', value: '1000+', color: 'from-purple-500 to-pink-500' },
-            { icon: Clock, label: 'Real-time Updates', value: '24/7', color: 'from-blue-500 to-cyan-500' },
-            { icon: Share2, label: 'Social Platforms', value: '10+', color: 'from-orange-500 to-red-500' },
-          ].map((stat, index) => (
+      {/* Stats Section */}
+      <section className="relative z-10 bg-gray-900/50 backdrop-blur-sm py-16 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+          {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="text-center group"
             >
-              <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${stat.color} flex items-center justify-center mb-4 mx-auto`}>
-                <stat.icon className="w-6 h-6 text-white" />
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <stat.icon className="w-8 h-8 text-white" />
+                </div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{stat.value}</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">{stat.label}</p>
+              <h3 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 group-hover:scale-105 transition-transform duration-300">
+                {stat.value}
+              </h3>
+              <p className="text-gray-300 text-lg font-medium">{stat.label}</p>
             </motion.div>
           ))}
         </div>
+      </section>
 
-        {/* Tab Navigation */}
-        <motion.div 
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-2 mb-8 border border-gray-200 dark:border-gray-700"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <div className="flex flex-wrap gap-2">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                    activeTab === tab.id
-                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20'
-                  }`}
-                >
-                  <Icon className="w-5 h-5" />
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        {/* Tab Content */}
+      {/* Features Section */}
+      <section id="features" className="py-20 px-4">
         <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          {activeTab === 'trends' && <TrendingTopics />}
-          {activeTab === 'generator' && <MemeGenerator />}
-          {activeTab === 'scheduler' && <ContentScheduler />}
-          {activeTab === 'analytics' && <Analytics />}
+          <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            Powerful Features
+          </h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Everything you need to create viral content and stay ahead of trends
+          </p>
+        </motion.div>
+        
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -10,
+                transition: { duration: 0.2 }
+              }}
+              className="group relative"
+            >
+              <div className="bg-gray-800/40 p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 h-full backdrop-blur-sm">
+                <div className="relative">
+                  <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                    <feature.icon className="w-10 h-10 text-white" />
+                  </div>
+                  <div className={`absolute -inset-4 bg-gradient-to-r ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300`}></div>
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 text-white group-hover:text-purple-300 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 text-lg leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* What Our Users Say Section */}
+      <section className="py-20 px-4 bg-gray-900/30">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            What Our Users Say
+          </h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Join thousands of satisfied creators who've transformed their content strategy
+          </p>
         </motion.div>
 
-        {/* Features Section */}
-        <section className="mt-20">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
-            Why Choose Our Platform?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Lightbulb,
-                title: 'AI-Powered Insights',
-                description: 'Advanced algorithms analyze trending topics across multiple platforms to identify viral content opportunities.'
-              },
-              {
-                icon: Image,
-                title: 'Smart Meme Generation',
-                description: 'Create engaging memes with customizable templates and AI-suggested captions that resonate with your audience.'
-              },
-              {
-                icon: Calendar,
-                title: 'Automated Scheduling',
-                description: 'Schedule your content at optimal times across multiple social media platforms for maximum reach and engagement.'
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center mb-4">
-                  <feature.icon className="w-6 h-6 text-white" />
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={testimonial.name}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              whileHover={{ y: -10 }}
+              className="bg-gray-800/40 p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 backdrop-blur-sm group"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <p className="text-gray-300 mb-6 text-lg leading-relaxed italic">
+                "{testimonial.content}"
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="text-3xl">{testimonial.avatar}</div>
+                <div>
+                  <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                  <p className="text-purple-400 text-sm">{testimonial.role}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Get Started Section */}
+      <section className="py-20 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            Ready to Go Viral?
+          </h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Join thousands of creators who are already using AI to dominate social media
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-10">
+            <Link 
+              href="/signup"
+              className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-lg rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg group"
+            >
+              <Zap className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+              Start Free Trial
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+            <Link 
+              href="/demo"
+              className="inline-flex items-center justify-center gap-3 px-10 py-4 border-2 border-purple-400 text-purple-400 font-bold text-lg rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300 transform hover:scale-105 group"
+            >
+              <Play className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+              Watch Demo
+            </Link>
           </div>
-        </section>
-      </main>
+
+          <div className="flex flex-wrap justify-center gap-8 text-gray-400">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span>No credit card required</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span>14-day free trial</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span>Cancel anytime</span>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Compact Footer */}
+      <footer className="bg-gray-900/80 backdrop-blur-sm py-12 px-4 border-t border-gray-800">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            {/* Brand */}
+            <div className="md:col-span-2">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+                  <Zap className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  MemeGen
+                </span>
+              </div>
+              <p className="text-gray-300 mb-4 max-w-md">
+                The smartest way to create viral content and stay ahead of social media trends.
+              </p>
+              <div className="flex space-x-4">
+                {[
+                  { icon: Twitter, href: "#", label: "Twitter" },
+                  { icon: Instagram, href: "#", label: "Instagram" },
+                  { icon: Youtube, href: "#", label: "YouTube" },
+                  { icon: Play, href: "#", label: "TikTok" }
+                ].map((social) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-purple-400 hover:bg-gray-700 transition-all duration-300 transform hover:scale-110"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Product</h4>
+              <ul className="space-y-2">
+                {['Features', 'Templates', 'Pricing', 'API'].map((link) => (
+                  <li key={link}>
+                    <a
+                      href={`#${link.toLowerCase()}`}
+                      className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:translate-x-1 transform inline-block"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-semibold mb-4">Company</h4>
+              <ul className="space-y-2">
+                {['About', 'Blog', 'Careers', 'Contact'].map((link) => (
+                  <li key={link}>
+                    <a
+                      href={`#${link.toLowerCase()}`}
+                      className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:translate-x-1 transform inline-block"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © 2024 MemeGen. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6 mt-4 md:mt-0">
+              <a href="#privacy" className="text-gray-400 hover:text-purple-400 text-sm transition-colors duration-300">Privacy</a>
+              <a href="#terms" className="text-gray-400 hover:text-purple-400 text-sm transition-colors duration-300">Terms</a>
+              <a href="#cookies" className="text-gray-400 hover:text-purple-400 text-sm transition-colors duration-300">Cookies</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
