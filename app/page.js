@@ -1,10 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Zap, TrendingUp, Sparkles, Brain, Palette, Target, Calendar, Share2, Twitter, Instagram, Youtube, Play, Star, ArrowRight, CheckCircle, Users, Award, Globe, Shield } from 'lucide-react';
+import { Zap, TrendingUp, Sparkles, Brain, Palette, Target, Calendar, Share2, Twitter, Instagram, Youtube, Play, Star, ArrowRight, CheckCircle, Users, Award, Globe, Shield, Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import { useMobile } from './hooks/useMobile';
 
 export default function LandingPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMobile, isTablet } = useMobile();
+
   const features = [
     {
       icon: TrendingUp,
@@ -78,18 +83,19 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-950 to-blue-950 text-white overflow-hidden">
       {/* Header */}
-      <header className="relative z-10 p-6">
+      <header className="relative z-10 p-4 md:p-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
+          <div className="flex items-center space-x-2 md:space-x-3">
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+              <Zap className="w-4 h-4 md:w-6 md:h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               MemeGen
             </span>
           </div>
           
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {['Features', 'Templates', 'Pricing', 'About'].map((item) => (
               <motion.a
                 key={item}
@@ -103,7 +109,8 @@ export default function LandingPage() {
             ))}
           </nav>
 
-          <div className="flex items-center space-x-4">
+          {/* Desktop CTA Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
             <Link 
               href="/login"
               className="px-4 py-2 text-gray-300 hover:text-white transition-colors duration-300 font-medium"
@@ -117,7 +124,55 @@ export default function LandingPage() {
               Get Started
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-gray-300 hover:text-white transition-colors duration-300"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden mt-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-purple-500/20 overflow-hidden"
+          >
+            <nav className="p-4 space-y-3">
+              {['Features', 'Templates', 'Pricing', 'About'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="block text-gray-300 hover:text-white transition-colors duration-300 font-medium py-2 px-3 rounded-lg hover:bg-purple-500/20"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </a>
+              ))}
+              <div className="pt-3 border-t border-gray-700 space-y-3">
+                <Link 
+                  href="/login"
+                  className="block text-gray-300 hover:text-white transition-colors duration-300 font-medium py-2 px-3 rounded-lg hover:bg-purple-500/20"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link 
+                  href="/signup"
+                  className="block bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium py-2 px-3 rounded-lg text-center hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Get Started
+                </Link>
+              </div>
+            </nav>
+          </motion.div>
+        )}
       </header>
 
       {/* AI-Powered Banner */}
@@ -125,23 +180,23 @@ export default function LandingPage() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-center py-4 bg-purple-800/30 backdrop-blur-sm border-b border-purple-500/20"
+        className="text-center py-3 md:py-4 bg-purple-800/30 backdrop-blur-sm border-b border-purple-500/20"
       >
-        <div className="flex items-center justify-center gap-2 text-sm text-purple-200">
-          <Sparkles className="w-4 h-4 text-purple-300 animate-pulse" />
+        <div className="flex items-center justify-center gap-2 text-xs md:text-sm text-purple-200">
+          <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-purple-300 animate-pulse" />
           AI-Powered Meme Generation
         </div>
       </motion.div>
 
       {/* Hero Section */}
-      <section className="relative z-0 flex flex-col items-center justify-center text-center py-20 px-4 min-h-[calc(100vh-120px)]">
+      <section className="relative z-0 flex flex-col items-center justify-center text-center py-12 md:py-20 px-4 min-h-[calc(100vh-120px)]">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-5xl"
+          className="max-w-5xl w-full"
         >
-          <h1 className="text-6xl md:text-8xl font-extrabold leading-tight mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold leading-tight mb-6 md:mb-8 px-2">
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Smart Meme
             </span>
@@ -150,10 +205,10 @@ export default function LandingPage() {
               Trend Generator
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
             Stay ahead of viral trends and create engaging content that resonates. AI-powered meme templates, trending topics, and instant content generation.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center px-4">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -161,11 +216,11 @@ export default function LandingPage() {
             >
               <Link 
                 href="/signup"
-                className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-lg rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg group"
+                className="inline-flex items-center justify-center gap-2 md:gap-3 px-6 md:px-10 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-base md:text-lg rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg w-full sm:w-auto"
               >
-                <Zap className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+                <Zap className="w-4 h-4 md:w-6 md:h-6 group-hover:rotate-12 transition-transform duration-300" />
                 Start Creating
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </motion.div>
             <motion.div
@@ -175,9 +230,9 @@ export default function LandingPage() {
             >
               <Link 
                 href="/demo"
-                className="inline-flex items-center justify-center gap-3 px-10 py-4 border-2 border-purple-400 text-purple-400 font-bold text-lg rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300 transform hover:scale-105 group"
+                className="inline-flex items-center justify-center gap-2 md:gap-3 px-6 md:px-10 py-3 md:py-4 border-2 border-purple-400 text-purple-400 font-bold text-base md:text-lg rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300 transform hover:scale-105 group w-full sm:w-auto"
               >
-                <TrendingUp className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                <TrendingUp className="w-4 h-4 md:w-6 md:h-6 group-hover:scale-110 transition-transform duration-300" />
                 View Demo
               </Link>
             </motion.div>
@@ -186,8 +241,8 @@ export default function LandingPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="relative z-10 bg-gray-900/50 backdrop-blur-sm py-16 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+      <section className="relative z-10 bg-gray-900/50 backdrop-blur-sm py-12 md:py-16 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -198,38 +253,38 @@ export default function LandingPage() {
               className="text-center group"
             >
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <stat.icon className="w-8 h-8 text-white" />
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl md:rounded-2xl flex items-center justify-center mb-3 md:mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
-                <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
               </div>
-              <h3 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 group-hover:scale-105 transition-transform duration-300">
+              <h3 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-1 md:mb-2 group-hover:scale-105 transition-transform duration-300">
                 {stat.value}
               </h3>
-              <p className="text-gray-300 text-lg font-medium">{stat.label}</p>
+              <p className="text-gray-300 text-sm md:text-lg font-medium">{stat.label}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4">
+      <section id="features" className="py-16 md:py-20 px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 md:mb-6 px-4">
             Powerful Features
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
             Everything you need to create viral content and stay ahead of trends
           </p>
         </motion.div>
         
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -244,17 +299,17 @@ export default function LandingPage() {
               }}
               className="group relative"
             >
-              <div className="bg-gray-800/40 p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 h-full backdrop-blur-sm">
+              <div className="bg-gray-800/40 p-6 md:p-8 rounded-xl md:rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 h-full backdrop-blur-sm">
                 <div className="relative">
-                  <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className="w-10 h-10 text-white" />
+                  <div className={`w-16 h-16 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                    <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
-                  <div className={`absolute -inset-4 bg-gradient-to-r ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300`}></div>
+                  <div className={`absolute -inset-4 bg-gradient-to-r ${feature.gradient} rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300`}></div>
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-white group-hover:text-purple-300 transition-colors duration-300">
+                <h3 className="text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-white group-hover:text-purple-300 transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 text-lg leading-relaxed">
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 text-base md:text-lg leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -264,23 +319,23 @@ export default function LandingPage() {
       </section>
 
       {/* What Our Users Say Section */}
-      <section className="py-20 px-4 bg-gray-900/30">
+      <section className="py-16 md:py-20 px-4 bg-gray-900/30">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 md:mb-6 px-4">
             What Our Users Say
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
             Join thousands of satisfied creators who've transformed their content strategy
           </p>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
@@ -289,21 +344,21 @@ export default function LandingPage() {
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               whileHover={{ y: -10 }}
-              className="bg-gray-800/40 p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 backdrop-blur-sm group"
+              className="bg-gray-800/40 p-6 md:p-8 rounded-xl md:rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 backdrop-blur-sm group"
             >
               <div className="flex items-center gap-2 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
-              <p className="text-gray-300 mb-6 text-lg leading-relaxed italic">
+              <p className="text-gray-300 mb-4 md:mb-6 text-base md:text-lg leading-relaxed italic">
                 "{testimonial.content}"
               </p>
-              <div className="flex items-center gap-4">
-                <div className="text-3xl">{testimonial.avatar}</div>
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="text-2xl md:text-3xl">{testimonial.avatar}</div>
                 <div>
-                  <h4 className="font-semibold text-white">{testimonial.name}</h4>
-                  <p className="text-purple-400 text-sm">{testimonial.role}</p>
+                  <h4 className="font-semibold text-white text-sm md:text-base">{testimonial.name}</h4>
+                  <p className="text-purple-400 text-xs md:text-sm">{testimonial.role}</p>
                 </div>
               </div>
             </motion.div>
@@ -312,7 +367,7 @@ export default function LandingPage() {
       </section>
 
       {/* Get Started Section */}
-      <section className="py-20 px-4">
+      <section className="py-16 md:py-20 px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -320,42 +375,42 @@ export default function LandingPage() {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 md:mb-6 px-4">
             Ready to Go Viral?
           </h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 mb-8 md:mb-10 max-w-2xl mx-auto px-4">
             Join thousands of creators who are already using AI to dominate social media
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-10">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center mb-8 md:mb-10 px-4">
             <Link 
               href="/signup"
-              className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-lg rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg group"
+              className="inline-flex items-center justify-center gap-2 md:gap-3 px-6 md:px-10 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-base md:text-lg rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg group w-full sm:w-auto"
             >
-              <Zap className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+              <Zap className="w-4 h-4 md:w-6 md:h-6 group-hover:rotate-12 transition-transform duration-300" />
               Start Free Trial
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
             <Link 
               href="/demo"
-              className="inline-flex items-center justify-center gap-3 px-10 py-4 border-2 border-purple-400 text-purple-400 font-bold text-lg rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300 transform hover:scale-105 group"
+              className="inline-flex items-center justify-center gap-2 md:gap-3 px-6 md:px-10 py-3 md:py-4 border-2 border-purple-400 text-purple-400 font-bold text-base md:text-lg rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300 transform hover:scale-105 group w-full sm:w-auto"
             >
-              <Play className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+              <Play className="w-4 h-4 md:w-6 md:h-6 group-hover:scale-110 transition-transform duration-300" />
               Watch Demo
             </Link>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8 text-gray-400">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-gray-400 text-sm md:text-base px-4">
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-400" />
+              <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-400" />
               <span>No credit card required</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-400" />
+              <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-400" />
               <span>14-day free trial</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-400" />
+              <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-400" />
               <span>Cancel anytime</span>
             </div>
           </div>
@@ -363,23 +418,23 @@ export default function LandingPage() {
       </section>
 
       {/* Compact Footer */}
-      <footer className="bg-gray-900/80 backdrop-blur-sm py-12 px-4 border-t border-gray-800">
+      <footer className="bg-gray-900/80 backdrop-blur-sm py-8 md:py-12 px-4 border-t border-gray-800">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
             {/* Brand */}
-            <div className="md:col-span-2">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
-                  <Zap className="w-6 h-6 text-white" />
+            <div className="sm:col-span-2">
+              <div className="flex items-center space-x-2 md:space-x-3 mb-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+                  <Zap className="w-4 h-4 md:w-6 md:h-6 text-white" />
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   MemeGen
                 </span>
               </div>
-              <p className="text-gray-300 mb-4 max-w-md">
+              <p className="text-gray-300 mb-4 max-w-md text-sm md:text-base">
                 The smartest way to create viral content and stay ahead of social media trends.
               </p>
-              <div className="flex space-x-4">
+              <div className="flex space-x-3 md:space-x-4">
                 {[
                   { icon: Twitter, href: "#", label: "Twitter" },
                   { icon: Instagram, href: "#", label: "Instagram" },
@@ -389,11 +444,11 @@ export default function LandingPage() {
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-purple-400 hover:bg-gray-700 transition-all duration-300 transform hover:scale-110"
+                    className="w-8 h-8 md:w-10 md:h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-purple-400 hover:bg-gray-700 transition-all duration-300 transform hover:scale-110"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <social.icon className="w-5 h-5" />
+                    <social.icon className="w-4 h-4 md:w-5 md:h-5" />
                   </motion.a>
                 ))}
               </div>
@@ -401,13 +456,13 @@ export default function LandingPage() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Product</h4>
+              <h4 className="text-white font-semibold mb-3 md:mb-4 text-sm md:text-base">Product</h4>
               <ul className="space-y-2">
                 {['Features', 'Templates', 'Pricing', 'API'].map((link) => (
                   <li key={link}>
                     <a
                       href={`#${link.toLowerCase()}`}
-                      className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:translate-x-1 transform inline-block"
+                      className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:translate-x-1 transform inline-block text-sm md:text-base"
                     >
                       {link}
                     </a>
@@ -417,13 +472,13 @@ export default function LandingPage() {
             </div>
 
             <div>
-              <h4 className="text-white font-semibold mb-4">Company</h4>
+              <h4 className="text-white font-semibold mb-3 md:mb-4 text-sm md:text-base">Company</h4>
               <ul className="space-y-2">
                 {['About', 'Blog', 'Careers', 'Contact'].map((link) => (
                   <li key={link}>
                     <a
                       href={`#${link.toLowerCase()}`}
-                      className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:translate-x-1 transform inline-block"
+                      className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:translate-x-1 transform inline-block text-sm md:text-base"
                     >
                       {link}
                     </a>
@@ -434,14 +489,14 @@ export default function LandingPage() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
+          <div className="border-t border-gray-800 pt-4 md:pt-6 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <p className="text-gray-400 text-xs md:text-sm text-center md:text-left">
               © 2024 MemeGen. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 mt-4 md:mt-0">
-              <a href="#privacy" className="text-gray-400 hover:text-purple-400 text-sm transition-colors duration-300">Privacy</a>
-              <a href="#terms" className="text-gray-400 hover:text-purple-400 text-sm transition-colors duration-300">Terms</a>
-              <a href="#cookies" className="text-gray-400 hover:text-purple-400 text-sm transition-colors duration-300">Cookies</a>
+            <div className="flex items-center gap-4 md:gap-6">
+              <a href="#privacy" className="text-gray-400 hover:text-purple-400 text-xs md:text-sm transition-colors duration-300">Privacy</a>
+              <a href="#terms" className="text-gray-400 hover:text-purple-400 text-xs md:text-sm transition-colors duration-300">Terms</a>
+              <a href="#cookies" className="text-gray-400 hover:text-purple-400 text-xs md:text-sm transition-colors duration-300">Cookies</a>
             </div>
           </div>
         </div>
