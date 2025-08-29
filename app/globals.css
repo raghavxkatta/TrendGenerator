@@ -8,12 +8,30 @@
   
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Dark mode scrollbar */
+  .dark ::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #7c3aed, #1d4ed8);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #6d28d9, #1e40af);
   }
 }
 
 @layer components {
   .gradient-text {
     @apply bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-hero {
+    @apply bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text text-transparent;
   }
   
   .gradient-bg {
@@ -30,6 +48,11 @@
   
   .button-secondary {
     @apply border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300;
+  }
+
+  /* Dark mode specific styles */
+  .dark .card-hover {
+    @apply hover:shadow-purple-500/20;
   }
 }
 
