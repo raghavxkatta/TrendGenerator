@@ -65,7 +65,7 @@ export default function SignupPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-950 to-blue-950 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-pink-900 to-orange-900 dark:from-black dark:via-purple-950 dark:to-pink-950 flex items-center justify-center p-4">
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
         {/* Left Side - Benefits */}
         <motion.div
