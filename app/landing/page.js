@@ -12,7 +12,7 @@ export default function LandingPage() {
         <div className="flex items-center space-x-2">
           <Zap className="w-6 h-6 text-blue-400" />
           <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            MemeGen
+            Dankify
           </span>
         </div>
         <nav className="hidden md:flex space-x-6">
@@ -215,7 +215,7 @@ export default function LandingPage() {
               <div className="flex items-center space-x-2 mb-4">
                 <Zap className="w-6 h-6 text-purple-400" />
                 <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  MemeGen
+                  Dankify
                 </span>
               </div>
               <p className="text-gray-300 mb-6 max-w-md">
@@ -309,7 +309,7 @@ export default function LandingPage() {
           {/* Bottom Bar */}
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2024 MemeGen. All rights reserved.
+              © 2024 Dankify. All rights reserved.
             </p>
             <p className="text-gray-400 text-sm flex items-center gap-2 mt-4 md:mt-0">
               Made with <span className="text-red-400">❤️</span> for content creators

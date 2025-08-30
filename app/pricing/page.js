@@ -92,7 +92,7 @@ export default function PricingPage() {
               <Zap className="w-4 h-4 md:w-6 md:h-6 text-white" />
             </div>
             <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-              MemeGen
+              Dankify
             </span>
           </Link>
           
@@ -353,7 +353,7 @@ export default function PricingPage() {
             Ready to Start Creating?
           </h2>
           <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Join thousands of creators who are already using MemeGen to dominate social media
+            Join thousands of creators who are already using Dankify to dominate social media
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
@@ -380,7 +380,7 @@ export default function PricingPage() {
       <footer className="bg-black/40 backdrop-blur-sm py-8 md:py-12 px-4 border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-white/60 text-sm md:text-base">
-            © 2024 MemeGen. All rights reserved. | 
+            © 2024 Dankify. All rights reserved. | 
             <a href="#privacy" className="hover:text-pink-400 transition-colors duration-300 ml-2">Privacy</a> | 
             <a href="#terms" className="hover:text-pink-400 transition-colors duration-300 ml-2">Terms</a>
           </p>

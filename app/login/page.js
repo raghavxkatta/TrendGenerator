@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -22,7 +23,7 @@ export default function LoginPage() {
     // Simulate login process
     setTimeout(() => {
       setIsLoading(false);
-      toast.success('Login Successful!', 'Welcome back to MemeGen!', 3000);
+      toast.success('Login Successful!', 'Welcome back to Dankify!', 3000);
       // Redirect to dashboard after successful login
       setTimeout(() => {
         window.location.href = '/dashboard';
@@ -54,12 +55,13 @@ export default function LoginPage() {
             <motion.div 
               className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg"
               whileHover={{ scale: 1.1, rotate: 5 }}
+
               transition={{ duration: 0.3 }}
             >
               <Zap className="w-6 h-6 md:w-7 md:h-7 text-white" />
             </motion.div>
             <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300">
-              MemeGen
+              Dankify
             </span>
           </Link>
         </motion.div>

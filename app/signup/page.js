@@ -86,7 +86,7 @@ export default function SignupPage() {
                   <Zap className="w-7 h-7 md:w-9 md:h-9 text-white" />
                 </motion.div>
                 <span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-purple-400 group-hover:to-blue-400 transition-all duration-300">
-                  MemeGen
+                  Dankify
                 </span>
               </Link>
             </div>
@@ -163,7 +163,7 @@ export default function SignupPage() {
                   <Zap className="w-6 h-6 md:w-7 md:h-7 text-white" />
                 </motion.div>
                 <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-purple-400 group-hover:to-blue-400 transition-all duration-300">
-                  MemeGen
+                  Dankify
                 </span>
               </Link>
             </div>

@@ -52,7 +52,7 @@ export default function Header() {
             </div>
             <div>
               <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
-                SmartMeme
+                
               </h1>
               <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">AI-Powered Content</p>
             </div>
